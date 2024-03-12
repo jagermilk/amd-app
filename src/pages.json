@@ -1,0 +1,47 @@
+{
+	"easycom": {
+		"custom":{
+			"^u-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^s-([^-].*)": "@/components/soa/s-$1/index.vue",
+			"shmily-drag-image": "shmily-drag-image/components/shmily-drag-image/shmily-drag-image.vue",
+			"uv-status-bar": "uv-status-bar/components/uv-status-bar/uv-status-bar.vue"
+		}
+	},	
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login/index",
+			"style": {
+			  "navigationBarTitleText": "登录",
+			  "navigationStyle": "custom"
+			},
+			"name": "Login"
+		  },
+		{
+			"path": "pages/order/order-list",
+			"style": {
+				"navigationStyle": "custom"
+			  },
+			  "name": "order-list"
+		},
+		{
+			"path": "pages/order/order-detail",
+			"style": {
+			  "navigationBarTitleText": "Order Detail"
+			},
+			"name": "order-detail"
+		  },
+		{
+			"path": "pages/order/order-photos",
+			"style": {
+			  "navigationBarTitleText": "Avv photos"
+			},
+			"name": "avv-photos"
+		  }
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}

@@ -1,0 +1,22 @@
+
+
+
+$normal-width:95%;
+$normal-padding:2.5%;
+.uni-input-input:disabled{
+  color:#bdbdbd;
+}
+.u-search__content {
+  border-radius: 8px !important;
+}
+.uni-input-input {
+  font-size: 14px !important;
+  height: 16px !important;
+}
+
+:deep(.u-form-item__body__right__message) {
+  margin-left: 120px !important;
+}
+:deep(.u-button--large){
+  height: 45px!important;
+}
