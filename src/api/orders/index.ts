@@ -35,5 +35,8 @@ export default class Orders {
     static DeleteAvvAttachment(id){
         return request.delete(`${pre}attachments/${id}`)
     }
+    static orderTracking(VIN){
+        return request.get(`${pre}common/order-tracking/${VIN}`)
+    }
 }
 

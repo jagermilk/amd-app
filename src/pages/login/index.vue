@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { forward } from '@/utils/router'
 import { ref, reactive, computed } from 'vue'
 import {
   LoginType,
@@ -10,10 +11,7 @@ import { getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 import { useUserStore } from '@/store'
 import useLoading from '@/hooks/loading'
-import UserApi from '@/api/user'
-// import { forward } from '@/utils/router'
 import type { LoginRequest, MailLoginRequest } from '@/types/models/user'
-import { toast } from '@/utils/common'
 import { CacheUtil } from '@/utils/storage'
 const showPass = ref(false)
 const { loading, setLoading } = useLoading()
@@ -40,21 +38,12 @@ const loginFormRules = reactive({
     required: true,
     message: proxy.$i18n?.t('密码不能为空'),
     trigger: ['blur', 'change'],
-  },
-  code: {
-    required: true,
-    message: proxy.$i18n?.t('验证码不能为空'),
-    trigger: ['blur', 'change'],
-  },
+  }
 })
 const mailLoginForm = reactive<MailLoginRequest>({
   code: '',
   mail: '',
 })
-interface Tab {
-  name: string
-  value: LoginType
-}
 const emailname = computed(() => {
   if (uni.getStorageSync('lang') !== 'en') {
     return '邮箱登录'
@@ -69,13 +58,6 @@ const passwordname = computed(() => {
     return 'Password login'
   }
 })
-const tabList = reactive<Tab[]>([
-  {
-    name: emailname,
-    value: LoginType.Mail,
-  },
-  { name: passwordname, value: LoginType.Password },
-])
 const doLogin = async () => {
   const valid = loginFormRef.value?.validate()
   if (!valid) return
@@ -124,9 +106,6 @@ async function handleLogin() {
     doLoginByMail()
   }
 }
-function changeTab(tab: Tab) {
-  currentTab.value = tab.value
-}
 function changeRemeberStatus(checked: boolean) {
   isSave.value = checked
 }
@@ -135,19 +114,8 @@ function changeRemeberStatus(checked: boolean) {
 <template>
   <view class="bg-white h-100vh flex flex-col">
     <!-- login banner -->
-    <view class="flex-0">
-    <view class="page-account-top">
-      <view class="page-account-top-logo">
-        <image mode="aspectFit" style="height: 160px;" src="https://demo.mycar.direct/img/logo.69765971.png" />
-      </view>
-      <view class="page-account-top-desc text-#808695 text-28rpx">Auto Compliance Portal</view>
-    </view>
-    <view class="backIcon">
-      <u-icon name="map" size="21px"></u-icon>
-    </view>
-  </view>
+    <l-header></l-header>
     <view class="flex flex-col items-center accountForm flex-1">
-      <!-- <u-tabs :list="tabList" line-color="#3c9cff" :current="1" @click="changeTab"></u-tabs> -->
       <view class="w-full">
         <u-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules">
           <u-form-item prop="username">
@@ -183,47 +151,16 @@ function changeRemeberStatus(checked: boolean) {
         <u-button class="mt-6" type="primary" shape="circle" size="large" :loading="loading" @click="handleLogin">
           {{ $t('登录') }}
         </u-button>
+        <view class="w-100% flex justify-end text-#2d8cf0 text-28rpx mt-20rpx" @click="forward('Trace')">Track & Trace
+        </view>
       </view>
     </view>
-    <view class="flex-0 mb-60rpx text-#808695">
-      <view class="flex justify-around w-80% m-auto mb-20rpx text-28rpx">
-          import.mycar.direct
-          <i class="ivu-icon ivu-icon-md-at"></i>
-          info@mycar.direct
-      </view>
-      <view class="w-100% flex justify-center text-28rpx">Copyright © 2023 Faytec Pty Ltd</view>
-    </view>
+    <l-footer></l-footer>
   </view>
 </template>
 
 <style lang="scss">
-.page-account-top {
-
-  .page-account-top-logo {
-    margin: 0 auto;
-    max-width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
-
-  .page-account-top-desc {
-    position: relative;
-    z-index: 999;
-    bottom: 30px;
-    text-align: center;
-  }
-}
-
-
 :deep(.u-form-item__body__right__message) {
   margin-left: 0 !important;
-}
-
-.backIcon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
 }
 </style>

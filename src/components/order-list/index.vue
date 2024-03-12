@@ -24,7 +24,6 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
 const props = defineProps(['OrderList'])
 import { forward } from '@/utils/router'
 onLoad(() => {
@@ -34,8 +33,8 @@ onLoad(() => {
 function scrolltolower() {
     toast('已加载全部订单')
 };
-function goOrderDetail(item){
-    forward('order-detail',item)
+function goOrderDetail(item) {
+    forward('order-detail', item)
 }
 
 </script>

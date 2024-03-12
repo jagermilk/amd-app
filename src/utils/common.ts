@@ -80,3 +80,6 @@ export function stopPropagation(e: Event) {
 export function baseFormatter(val: unknown) {
   return val
 }
+export function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}

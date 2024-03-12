@@ -3,6 +3,7 @@
 		"custom":{
 			"^u-(.*)": "uview-plus/components/u-$1/u-$1.vue",
 			"^s-([^-].*)": "@/components/soa/s-$1/index.vue",
+			"^l-([^-].*)": "@/components/login/l-$1/index.vue",
 			"shmily-drag-image": "shmily-drag-image/components/shmily-drag-image/shmily-drag-image.vue",
 			"uv-status-bar": "uv-status-bar/components/uv-status-bar/uv-status-bar.vue"
 		}
@@ -11,10 +12,16 @@
 		{
 			"path": "pages/login/index",
 			"style": {
-			  "navigationBarTitleText": "登录",
 			  "navigationStyle": "custom"
 			},
 			"name": "Login"
+		  },
+		{
+			"path": "pages/login/trace",
+			"style": {
+			  "navigationStyle": "custom"
+			},
+			"name": "Trace"
 		  },
 		{
 			"path": "pages/order/order-list",
